@@ -4,16 +4,16 @@
       {{ todo.title }}
     </div>
     <div class="card-info">
-      <button :class="['card-status', { done: todo.completed }]">
-        {{ todo.completed }}
+      <button :class="cardStatusClass" @click="toggleStatus">
+        {{ statusMsg }}
       </button>
     </div>
   </li>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@vue/composition-api'
-
+import { defineComponent, PropType, toRefs, ref } from '@vue/composition-api'
+import useStatus from '~/composables/useStatus';
 interface Todo   {
   userId: number,
   id: number,
@@ -24,9 +24,20 @@ interface Todo   {
 export default defineComponent({
   props: {
     todo : {
-       type: Object as PropType<Todo>,
-       required: true,
+      type: Object as PropType<Todo>,
+      required: true,
     }
+  },
+  setup(props){
+    const { todo } = toRefs(props);
+    const { status, statusMsg, toggleStatus, cardStatusClass} = useStatus(todo.value.completed);
+
+    return {
+      status,
+      statusMsg,
+      cardStatusClass,
+      toggleStatus,
+    };
   },
 })
 </script>
