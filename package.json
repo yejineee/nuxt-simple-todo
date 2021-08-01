@@ -1,0 +1,30 @@
+{
+  "name": "nuxt-simple-todo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "lint": "vue-cli-service lint",
+    "dev": "nuxt",
+    "generate": "nuxt generate",
+    "start": "nuxt start"
+  },
+  "dependencies": {
+    "@vue/composition-api": "1.0.5",
+    "core-js": "3.15.1",
+    "nuxt": "2.15.7"
+  },
+  "devDependencies": {
+    "@nuxt/types": "^2.15.7",
+    "@nuxt/typescript-build": "^2.1.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "prettier": "^2.3.0"
+  }
+}
