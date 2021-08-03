@@ -1,7 +1,12 @@
 <template>
   <Modal class='card-detail-modal'>
+    <template #header>
+      <button type="button" @click="closeHandler">닫기</button>
+    </template>
     <div class='card__title'>{{title}}</div>
-    <button type="button" @click="closeHandler">닫기</button>
+    <template #footer>
+      <button type="button">수정</button>
+    </template>
   </Modal>
 </template>
 
