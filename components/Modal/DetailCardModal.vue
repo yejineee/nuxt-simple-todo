@@ -3,15 +3,19 @@
     <template #header>
       <button type="button" @click="closeHandler">닫기</button>
     </template>
-    <div class='card__title'>{{title}}</div>
+    <form v-if="isEditMode" @submit="toggleEditMode">
+      <input  v-model="updatedTitle" class='edit-title-input' />
+    </form>
+    <div v-else class='card__title' @click="toggleEditMode">{{updatedTitle}}</div>
     <template #footer>
-      <button type="button">수정</button>
+      <button v-if="isEditMode" type='button' @click="toggleEditMode">저장</button>
+      <button v-else type="button" @click="toggleEditMode">수정</button>
     </template>
   </Modal>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent, ref } from '@vue/composition-api'
 
 export default defineComponent({
   props: {
@@ -24,6 +28,16 @@ export default defineComponent({
       default(){
         return () => {};
       }
+    }
+  },
+  setup(props){
+    const updatedTitle = ref(props.title);
+    const isEditMode = ref(false);
+    const toggleEditMode = () => isEditMode.value = !isEditMode.value;
+    return {
+      updatedTitle,
+      isEditMode,
+      toggleEditMode,
     }
   }
 })

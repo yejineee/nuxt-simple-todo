@@ -10,7 +10,7 @@
         {{ todo.title }}
       </div>
       <div class="card-info">
-        <button :class="cardStatusClass" @click="toggleStatus">
+        <button :class="cardStatusClass" @click.stop="toggleStatus">
           {{ statusMsg }}
         </button>
       </div>
