@@ -20,6 +20,8 @@ $in-progress: blue;
   border-radius: 4px;
   padding: 0 3rem;
 
+  cursor:pointer;
+
   & + & {
     margin-top: 1rem;
   }
