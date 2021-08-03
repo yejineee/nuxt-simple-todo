@@ -1,19 +1,27 @@
 <template>
-  <li class="card-wrapper">
-    <div class="card-summary">
-      {{ todo.title }}
-    </div>
-    <div class="card-info">
-      <button :class="cardStatusClass" @click="toggleStatus">
-        {{ statusMsg }}
-      </button>
-    </div>
-  </li>
+  <div>
+    <DetailCardModal 
+      v-if="isOpenDetailModal" 
+      :title="todo.title" 
+      :closeHandler="toggleDetailModal"
+    />
+    <li class="card-wrapper" @click="toggleDetailModal">
+      <div class="card-summary">
+        {{ todo.title }}
+      </div>
+      <div class="card-info">
+        <button :class="cardStatusClass" @click.stop="toggleStatus">
+          {{ statusMsg }}
+        </button>
+      </div>
+    </li>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType, toRefs, ref } from '@vue/composition-api'
 import useStatus from '~/composables/useStatus';
+import DetailCardModal from './Modal/DetailCardModal.vue';
 interface Todo   {
   userId: number,
   id: number,
@@ -22,6 +30,7 @@ interface Todo   {
 };
 
 export default defineComponent({
+  components: { DetailCardModal },
   props: {
     todo : {
       type: Object as PropType<Todo>,
@@ -29,6 +38,8 @@ export default defineComponent({
     }
   },
   setup(props){
+    const isOpenDetailModal = ref(false);
+    const toggleDetailModal = () => isOpenDetailModal.value = !isOpenDetailModal.value;
     const { todo } = toRefs(props);
     const { statusMsg, toggleStatus, cardStatusClass} = useStatus(todo.value.completed);
 
@@ -36,6 +47,8 @@ export default defineComponent({
       statusMsg,
       cardStatusClass,
       toggleStatus,
+      isOpenDetailModal,
+      toggleDetailModal
     };
   },
 })
