@@ -30,10 +30,9 @@ export default defineComponent({
   },
   setup(props){
     const { todo } = toRefs(props);
-    const { status, statusMsg, toggleStatus, cardStatusClass} = useStatus(todo.value.completed);
+    const { statusMsg, toggleStatus, cardStatusClass} = useStatus(todo.value.completed);
 
     return {
-      status,
       statusMsg,
       cardStatusClass,
       toggleStatus,

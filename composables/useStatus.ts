@@ -9,7 +9,6 @@ export default function useStatus(completed:boolean) {
   };
 
   return {
-    status,
     statusMsg,
     toggleStatus,
     cardStatusClass
